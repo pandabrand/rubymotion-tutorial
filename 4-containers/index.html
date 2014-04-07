@@ -125,7 +125,7 @@
 
 <p>In <code>AppDelegate</code>, change our <code>rootViewController</code> assignment to use a <code>UINavigationController</code>:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-  <span class="n">controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="no">UINavigationController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithRootViewController</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 </code></pre>
@@ -155,7 +155,7 @@
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="nb">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Tap&quot;</span>
 
-  <span class="n">right_button</span> <span class="o">=</span> <span class="no">UIBarButtonItem</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithTitle</span><span class="p">(</span><span class="s2">&quot;Push&quot;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="no">UIBarButtonItemStyleBordered</span><span class="p">,</span> <span class="n">target</span><span class="ss">:self</span><span class="p">,</span> <span class="n">action</span><span class="ss">:&#39;push&#39;</span><span class="p">)</span>
+  <span class="n">right_button</span> <span class="o">=</span> <span class="no">UIBarButtonItem</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithTitle</span><span class="p">(</span><span class="s2">&quot;Push&quot;</span><span class="p">,</span> <span class="ss">style</span><span class="p">:</span> <span class="no">UIBarButtonItemStyleBordered</span><span class="p">,</span> <span class="ss">target</span><span class="p">:</span><span class="nb">self</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span><span class="s1">&#39;push&#39;</span><span class="p">)</span>
   <span class="nb">self</span><span class="o">.</span><span class="n">navigationItem</span><span class="o">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="n">right_button</span>
 <span class="k">end</span>
 </code></pre>
@@ -168,8 +168,8 @@
 <p>Anyway, <code>target</code> is the object you want to call the <code>action</code> function on. Let&#39;s implement it in our <code>TapController</code> so you get a better idea:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">def</span> <span class="nf">push</span>
-    <span class="n">new_controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
-    <span class="nb">self</span><span class="o">.</span><span class="n">navigationController</span><span class="o">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="n">new_controller</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
+    <span class="n">new_controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">navigationController</span><span class="o">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="n">new_controller</span><span class="p">,</span> <span class="ss">animated</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 </code></pre>
@@ -202,10 +202,10 @@
 
 <p>In <code>AppDelegate</code>, let&#39;s make a small change:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-  <span class="n">controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="n">nav_controller</span> <span class="o">=</span> <span class="no">UINavigationController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithRootViewController</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
 
-  <span class="n">tab_controller</span> <span class="o">=</span> <span class="no">UITabBarController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">tab_controller</span> <span class="o">=</span> <span class="no">UITabBarController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="n">tab_controller</span><span class="o">.</span><span class="n">viewControllers</span> <span class="o">=</span> <span class="o">[</span><span class="n">nav_controller</span><span class="o">]</span>
   <span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="n">tab_controller</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -224,9 +224,9 @@
 
 <p>Override <code>initWithNibName:bundle:</code> in TapController, and go ahead and create such an object:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-  <span class="k">def</span> <span class="nf">initWithNibName</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="n">bundle</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">initWithNibName</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="n">bundle</span><span class="p">)</span>
     <span class="k">super</span>
-    <span class="nb">self</span><span class="o">.</span><span class="n">tabBarItem</span> <span class="o">=</span> <span class="no">UITabBarItem</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithTabBarSystemItem</span><span class="p">(</span><span class="no">UITabBarSystemItemFavorites</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">tabBarItem</span> <span class="o">=</span> <span class="no">UITabBarItem</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithTabBarSystemItem</span><span class="p">(</span><span class="no">UITabBarSystemItemFavorites</span><span class="p">,</span> <span class="ss">tag</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
     <span class="nb">self</span>
   <span class="k">end</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -241,11 +241,11 @@
 
 <p>One more thing! Let&#39;s make another tab. We don&#39;t really have anything to do in this other tab yet, so let&#39;s just make an empty <code>UIViewController</code> with a different background color in <code>AppDelegate</code>:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-  <span class="n">other_controller</span> <span class="o">=</span> <span class="no">UIViewController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">other_controller</span> <span class="o">=</span> <span class="no">UIViewController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="n">other_controller</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Other&quot;</span>
   <span class="n">other_controller</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="no">UIColor</span><span class="o">.</span><span class="n">purpleColor</span>
 
-  <span class="n">tab_controller</span> <span class="o">=</span> <span class="no">UITabBarController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">tab_controller</span> <span class="o">=</span> <span class="no">UITabBarController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="n">tab_controller</span><span class="o">.</span><span class="n">viewControllers</span> <span class="o">=</span> <span class="o">[</span><span class="n">nav_controller</span><span class="p">,</span> <span class="n">other_controller</span><span class="o">]</span>
   <span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="n">tab_controller</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>

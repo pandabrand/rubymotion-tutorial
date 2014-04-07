@@ -127,7 +127,7 @@
 <p>The base view of an app is the &quot;window&quot;; all other views are direct or descendent subviews of the window. Your app&#39;s window is a subclass of <code>UIView</code> called <code>UIWindow</code>.</p>
 
 <p>Let&#39;s get to some code. In <code>AppDelegate</code>, change our <code>didFinishLaunching</code> method to look like:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
   <span class="c1"># UIScreen describes the display our app is running on</span>
   <span class="vi">@window</span> <span class="o">=</span> <span class="no">UIWindow</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithFrame</span><span class="p">(</span><span class="no">UIScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
   <span class="vi">@window</span><span class="o">.</span><span class="n">makeKeyAndVisible</span>

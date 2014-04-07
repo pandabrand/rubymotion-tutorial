@@ -150,7 +150,7 @@
 </div>
 
 <p>So now we can do a neat trick like this:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="n">server_hash</span> <span class="o">=</span> <span class="p">{</span> <span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Clay&quot;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s2">&quot;my@email.com&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1000</span> <span class="p">}</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="n">server_hash</span> <span class="o">=</span> <span class="p">{</span> <span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Clay&quot;</span><span class="p">,</span> <span class="ss">email</span><span class="p">:</span> <span class="s2">&quot;my@email.com&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1000</span> <span class="p">}</span>
 <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">server_hash</span><span class="p">)</span>
 <span class="vi">@user</span><span class="o">.</span><span class="n">name</span>
 <span class="o">=&gt;</span> <span class="no">Clay</span>
@@ -199,8 +199,8 @@
 
   <span class="c1"># called when saving an object to NSUserDefaults</span>
   <span class="k">def</span> <span class="nf">encodeWithCoder</span><span class="p">(</span><span class="n">encoder</span><span class="p">)</span>
-    <span class="n">encoder</span><span class="o">.</span><span class="n">encodeObject</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s2">&quot;message&quot;</span><span class="p">)</span>
-    <span class="n">encoder</span><span class="o">.</span><span class="n">encodeObject</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">forKey</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">encoder</span><span class="o">.</span><span class="n">encodeObject</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="ss">forKey</span><span class="p">:</span> <span class="s2">&quot;message&quot;</span><span class="p">)</span>
+    <span class="n">encoder</span><span class="o">.</span><span class="n">encodeObject</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="ss">forKey</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
@@ -239,7 +239,7 @@
   <span class="c1"># called when saving an object to NSUserDefaults</span>
   <span class="k">def</span> <span class="nf">encodeWithCoder</span><span class="p">(</span><span class="n">encoder</span><span class="p">)</span>
     <span class="no">PROPERTIES</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">prop</span><span class="o">|</span>
-      <span class="n">encoder</span><span class="o">.</span><span class="n">encodeObject</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">prop</span><span class="p">),</span> <span class="n">forKey</span><span class="p">:</span> <span class="n">prop</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
+      <span class="n">encoder</span><span class="o">.</span><span class="n">encodeObject</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">prop</span><span class="p">),</span> <span class="ss">forKey</span><span class="p">:</span> <span class="n">prop</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
     <span class="p">}</span>
   <span class="k">end</span>
 </code></pre>
@@ -287,7 +287,7 @@
 
 <p>In <code>AppDelegate</code>, we&#39;re going to create a label for each of the <code>User</code>&#39;s fields: <code>id</code>, <code>name</code>, and <code>email</code>. Then we&#39;ll start observing those attributes on our object and update each label accordingly. Sound simple? Well, let&#39;s walk through it anyway.</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">class</span> <span class="nc">AppDelegate</span>
-  <span class="kp">include</span> <span class="no">BW</span><span class="o">::</span><span class="no">KVO</span>
+  <span class="kp">include</span> <span class="ss">BW</span><span class="p">:</span><span class="ss">:KVO</span>
 
   <span class="kp">attr_accessor</span> <span class="ss">:user</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -295,7 +295,7 @@
 </div>
 
 <p>In order to use BubbleWrap&#39;s nice KVO wrapper (we&#39;ll get to that in a second), we need to <code>include</code> its methods. You must do this for any object which observes properties. We also added a <code>#user</code> attribute, which will make debugging easier. Now, about those views:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
     <span class="vi">@window</span> <span class="o">=</span> <span class="no">UIWindow</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithFrame</span><span class="p">(</span><span class="no">UIScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">applicationFrame</span><span class="p">)</span>
     <span class="vi">@window</span><span class="o">.</span><span class="n">makeKeyAndVisible</span>
 

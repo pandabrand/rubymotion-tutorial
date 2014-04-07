@@ -233,10 +233,10 @@
 
 <p>And in our <code>AppDelegate</code>, throw a <code>UIWindow</code> and <code>UINavigationController</code> on the screen:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">class</span> <span class="nc">AppDelegate</span>
-  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
     <span class="vi">@window</span> <span class="o">=</span> <span class="no">UIWindow</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithFrame</span><span class="p">(</span><span class="no">UIScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
 
-    <span class="vi">@search_controller</span> <span class="o">=</span> <span class="no">SearchController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="ss">:nil</span><span class="p">)</span>
+    <span class="vi">@search_controller</span> <span class="o">=</span> <span class="no">SearchController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span><span class="kp">nil</span><span class="p">)</span>
     <span class="vi">@navigation_controller</span> <span class="o">=</span> <span class="no">UINavigationController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithRootViewController</span><span class="p">(</span><span class="vi">@search_controller</span><span class="p">)</span>
 
     <span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="vi">@navigation_controller</span>
@@ -274,8 +274,8 @@
     <span class="nb">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">addSubview</span> <span class="vi">@text_field</span>
 
     <span class="vi">@search</span> <span class="o">=</span> <span class="no">UIButton</span><span class="o">.</span><span class="n">buttonWithType</span><span class="p">(</span><span class="no">UIButtonTypeRoundedRect</span><span class="p">)</span>
-    <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Search&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="ss">:UIControlStateNormal</span><span class="p">)</span>
-    <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Loading&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="ss">:UIControlStateDisabled</span><span class="p">)</span>
+    <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Search&quot;</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span><span class="no">UIControlStateNormal</span><span class="p">)</span>
+    <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Loading&quot;</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span><span class="no">UIControlStateDisabled</span><span class="p">)</span>
     <span class="vi">@search</span><span class="o">.</span><span class="n">sizeToFit</span>
     <span class="vi">@search</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="no">CGPointMake</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="vi">@text_field</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="mi">40</span><span class="p">)</span>
     <span class="nb">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">addSubview</span> <span class="vi">@search</span>
@@ -321,7 +321,7 @@
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="n">hex</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
-    <span class="no">BW</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.colr.org/json/color/</span><span class="si">#{</span><span class="n">hex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+    <span class="ss">BW</span><span class="p">:</span><span class="ss">:HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.colr.org/json/color/</span><span class="si">#{</span><span class="n">hex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
       <span class="nb">p</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">to_str</span>
       <span class="c1"># for now, pass nil.</span>
       <span class="n">block</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="kp">nil</span><span class="p">)</span>
@@ -342,8 +342,8 @@
 
 <p>BubbleWrap to the rescue again! Our nifty friend also has a <code>BW::JSON.parse</code> method which does exactly what it sounds like. Let&#39;s update <code>Color.find</code> to use it:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="n">hex</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
-  <span class="no">BW</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.colr.org/json/color/</span><span class="si">#{</span><span class="n">hex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
-    <span class="n">result_data</span> <span class="o">=</span> <span class="no">BW</span><span class="o">::</span><span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">to_str</span><span class="p">)</span>
+  <span class="ss">BW</span><span class="p">:</span><span class="ss">:HTTP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.colr.org/json/color/</span><span class="si">#{</span><span class="n">hex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+    <span class="n">result_data</span> <span class="o">=</span> <span class="ss">BW</span><span class="p">:</span><span class="ss">:JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">to_str</span><span class="p">)</span>
     <span class="n">color_data</span> <span class="o">=</span> <span class="n">result_data</span><span class="o">[</span><span class="s2">&quot;colors&quot;</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span>
 
     <span class="c1"># Colr will return a color with id == -1 if no color was found</span>
@@ -364,9 +364,9 @@
 
       <span class="no">Color</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">hex</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">color</span><span class="o">|</span>
         <span class="k">if</span> <span class="n">color</span><span class="o">.</span><span class="n">nil?</span>
-          <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;None :(&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="no">UIControlStateNormal</span><span class="p">)</span>
+          <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;None :(&quot;</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span> <span class="no">UIControlStateNormal</span><span class="p">)</span>
         <span class="k">else</span>
-          <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Search&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="no">UIControlStateNormal</span><span class="p">)</span>
+          <span class="vi">@search</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Search&quot;</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span> <span class="no">UIControlStateNormal</span><span class="p">)</span>
           <span class="nb">self</span><span class="o">.</span><span class="n">open_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="k">end</span>
 
@@ -388,7 +388,7 @@
 
 <p>Great! Let&#39;s fix that <code>open_color</code> method to work. It should push a <code>ColorController</code> with the proper color, so we should probably fill in that implementation now.</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">open_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-  <span class="nb">self</span><span class="o">.</span><span class="n">navigationController</span><span class="o">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="no">ColorController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithColor</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="n">animated</span><span class="ss">:true</span><span class="p">)</span>
+  <span class="nb">self</span><span class="o">.</span><span class="n">navigationController</span><span class="o">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="no">ColorController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithColor</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="ss">animated</span><span class="p">:</span><span class="kp">true</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 </div>
@@ -402,7 +402,7 @@
   <span class="kp">attr_accessor</span> <span class="ss">:color</span>
 
   <span class="k">def</span> <span class="nf">initWithColor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="ss">:nil</span><span class="p">)</span>
+    <span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span><span class="kp">nil</span><span class="p">)</span>
     <span class="nb">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
     <span class="nb">self</span>
   <span class="k">end</span>
@@ -449,9 +449,9 @@
 
     <span class="c1"># Tapping this adds the tag.</span>
     <span class="vi">@add</span> <span class="o">=</span> <span class="no">UIButton</span><span class="o">.</span><span class="n">buttonWithType</span><span class="p">(</span><span class="no">UIButtonTypeRoundedRect</span><span class="p">)</span>
-    <span class="vi">@add</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Add&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="ss">:UIControlStateNormal</span><span class="p">)</span>
-    <span class="vi">@add</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Adding...&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="ss">:UIControlStateDisabled</span><span class="p">)</span>
-    <span class="vi">@add</span><span class="o">.</span><span class="n">setTitleColor</span><span class="p">(</span><span class="no">UIColor</span><span class="o">.</span><span class="n">lightGrayColor</span><span class="p">,</span> <span class="n">forState</span><span class="ss">:UIControlStateDisabled</span><span class="p">)</span>
+    <span class="vi">@add</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Add&quot;</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span><span class="no">UIControlStateNormal</span><span class="p">)</span>
+    <span class="vi">@add</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Adding...&quot;</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span><span class="no">UIControlStateDisabled</span><span class="p">)</span>
+    <span class="vi">@add</span><span class="o">.</span><span class="n">setTitleColor</span><span class="p">(</span><span class="no">UIColor</span><span class="o">.</span><span class="n">lightGrayColor</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span><span class="no">UIControlStateDisabled</span><span class="p">)</span>
     <span class="vi">@add</span><span class="o">.</span><span class="n">sizeToFit</span>
     <span class="vi">@add</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="o">[[</span><span class="vi">@text_field</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="vi">@text_field</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="vi">@text_field</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">y</span><span class="o">]</span><span class="p">,</span>
                       <span class="vi">@add</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">]</span>
@@ -460,7 +460,7 @@
     <span class="c1"># The table for our color&#39;s tags.</span>
     <span class="n">table_frame</span> <span class="o">=</span> <span class="o">[[</span><span class="mi">0</span><span class="p">,</span> <span class="vi">@info_container</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="o">]</span><span class="p">,</span>
                   <span class="o">[</span><span class="nb">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="nb">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="vi">@info_container</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="nb">self</span><span class="o">.</span><span class="n">navigationController</span><span class="o">.</span><span class="n">navigationBar</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span><span class="o">]]</span>
-    <span class="vi">@table_view</span> <span class="o">=</span> <span class="no">UITableView</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithFrame</span><span class="p">(</span><span class="n">table_frame</span><span class="p">,</span> <span class="n">style</span><span class="ss">:UITableViewStylePlain</span><span class="p">)</span>
+    <span class="vi">@table_view</span> <span class="o">=</span> <span class="no">UITableView</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithFrame</span><span class="p">(</span><span class="n">table_frame</span><span class="p">,</span> <span class="ss">style</span><span class="p">:</span><span class="no">UITableViewStylePlain</span><span class="p">)</span>
     <span class="nb">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">addSubview</span><span class="p">(</span><span class="vi">@table_view</span><span class="p">)</span>
   <span class="k">end</span>
 </code></pre>
@@ -481,15 +481,15 @@
     <span class="vi">@table_view</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="nb">self</span>
   <span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span><span class="ss">:section</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">numberOfRowsInSection</span><span class="p">:</span><span class="n">section</span><span class="p">)</span>
     <span class="nb">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">count</span>
   <span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">cellForRowAtIndexPath</span><span class="ss">:indexPath</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">cellForRowAtIndexPath</span><span class="p">:</span><span class="n">indexPath</span><span class="p">)</span>
     <span class="vi">@reuseIdentifier</span> <span class="o">||=</span> <span class="s2">&quot;CELL_IDENTIFIER&quot;</span>
 
     <span class="n">cell</span> <span class="o">=</span> <span class="n">tableView</span><span class="o">.</span><span class="n">dequeueReusableCellWithIdentifier</span><span class="p">(</span><span class="vi">@reuseIdentifier</span><span class="p">)</span> <span class="o">||</span> <span class="k">begin</span>
-      <span class="no">UITableViewCell</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithStyle</span><span class="p">(</span><span class="no">UITableViewCellStyleDefault</span><span class="p">,</span> <span class="n">reuseIdentifier</span><span class="ss">:@reuseIdentifier</span><span class="p">)</span>
+      <span class="no">UITableViewCell</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithStyle</span><span class="p">(</span><span class="no">UITableViewCellStyleDefault</span><span class="p">,</span> <span class="ss">reuseIdentifier</span><span class="p">:</span><span class="vi">@reuseIdentifier</span><span class="p">)</span>
     <span class="k">end</span>
 
     <span class="n">cell</span><span class="o">.</span><span class="n">textLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">tags</span><span class="o">[</span><span class="n">indexPath</span><span class="o">.</span><span class="n">row</span><span class="o">].</span><span class="n">name</span>
@@ -507,7 +507,7 @@
 
 <p>Here&#39;s what that <code>add_tag</code> method looks like:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="k">def</span> <span class="nf">add_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
-    <span class="no">BW</span><span class="o">::</span><span class="no">HTTP</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://www.colr.org/js/color/</span><span class="si">#{</span><span class="nb">self</span><span class="o">.</span><span class="n">hex</span><span class="si">}</span><span class="s2">/addtag/&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="p">{</span><span class="n">tags</span><span class="p">:</span> <span class="n">tag</span><span class="p">})</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
+    <span class="ss">BW</span><span class="p">:</span><span class="ss">:HTTP</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;http://www.colr.org/js/color/</span><span class="si">#{</span><span class="nb">self</span><span class="o">.</span><span class="n">hex</span><span class="si">}</span><span class="s2">/addtag/&quot;</span><span class="p">,</span> <span class="ss">payload</span><span class="p">:</span> <span class="p">{</span><span class="ss">tags</span><span class="p">:</span> <span class="n">tag</span><span class="p">})</span> <span class="k">do</span> <span class="o">|</span><span class="n">response</span><span class="o">|</span>
       <span class="n">block</span><span class="o">.</span><span class="n">call</span>
     <span class="k">end</span>
   <span class="k">end</span>

@@ -145,11 +145,11 @@
 
 <p>Back in <code>AppDelegate</code>, let&#39;s modify our tab controller to use this new controller:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-  <span class="n">controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">controller</span> <span class="o">=</span> <span class="no">TapController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="n">nav_controller</span> <span class="o">=</span> <span class="no">UINavigationController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithRootViewController</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
-  <span class="n">alphabet_controller</span> <span class="o">=</span> <span class="no">AlphabetController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">alphabet_controller</span> <span class="o">=</span> <span class="no">AlphabetController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
 
-  <span class="n">tab_controller</span> <span class="o">=</span> <span class="no">UITabBarController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+  <span class="n">tab_controller</span> <span class="o">=</span> <span class="no">UITabBarController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="n">tab_controller</span><span class="o">.</span><span class="n">viewControllers</span> <span class="o">=</span> <span class="o">[</span><span class="n">alphabet_controller</span><span class="p">,</span> <span class="n">nav_controller</span><span class="o">]</span>
   <span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="n">tab_controller</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -178,11 +178,11 @@
 </ul>
 
 <p>There are actually a bunch of methods it can use (which you can check in <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UITableViewDataSource_Protocol/Reference/Reference.html">Apple&#39;s docs</a>) but the most basic table view <code>dataSource</code> only needs those. So...let&#39;s define them!</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">cellForRowAtIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">cellForRowAtIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
     <span class="c1"># return the UITableViewCell for the row</span>
   <span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span><span class="p">:</span> <span class="n">section</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">numberOfRowsInSection</span><span class="p">:</span> <span class="n">section</span><span class="p">)</span>
     <span class="c1"># return the number of rows</span>
   <span class="k">end</span>
 </code></pre>
@@ -193,11 +193,11 @@
 <p><code>UITableViewCell</code> is the <code>UIView</code> subclass that actually gets displayed in our table. The default implementation comes with some useful fields, including a <code>textLabel</code> and an <code>imageView</code>. You can subclass <code>UITableViewCell</code> to add a custom look and behavior, but we can get something useful using the normal class.</p>
 
 <p><code>cellForRowAtIndexPath</code> should either create a new cell or recycle an off-screen one, populate it with the data corresponding to <code>indexPath</code>, and return the cell. Here&#39;s what a more complete implementation looks like:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">cellForRowAtIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax">  <span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">cellForRowAtIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
     <span class="vi">@reuseIdentifier</span> <span class="o">||=</span> <span class="s2">&quot;CELL_IDENTIFIER&quot;</span>
 
     <span class="n">cell</span> <span class="o">=</span> <span class="n">tableView</span><span class="o">.</span><span class="n">dequeueReusableCellWithIdentifier</span><span class="p">(</span><span class="vi">@reuseIdentifier</span><span class="p">)</span> <span class="o">||</span> <span class="k">begin</span>
-      <span class="no">UITableViewCell</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithStyle</span><span class="p">(</span><span class="no">UITableViewCellStyleDefault</span><span class="p">,</span> <span class="n">reuseIdentifier</span><span class="ss">:@reuseIdentifier</span><span class="p">)</span>
+      <span class="no">UITableViewCell</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithStyle</span><span class="p">(</span><span class="no">UITableViewCellStyleDefault</span><span class="p">,</span> <span class="ss">reuseIdentifier</span><span class="p">:</span><span class="vi">@reuseIdentifier</span><span class="p">)</span>
     <span class="k">end</span>
 
     <span class="c1"># put your data in the cell</span>
@@ -226,14 +226,14 @@
 <p>This will create an array containing all the uppercase letters of the alphabet. Nifty, huh?</p>
 
 <p>Now we need to fill in our two data source methods. <code>numberOfRowsInSection:</code> is pretty straight-forward, since all we&#39;re doing is using <code>@data</code>:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span><span class="p">:</span> <span class="n">section</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">numberOfRowsInSection</span><span class="p">:</span> <span class="n">section</span><span class="p">)</span>
   <span class="vi">@data</span><span class="o">.</span><span class="n">count</span>
 <span class="k">end</span>
 </code></pre>
 </div>
 
 <p>In <code>cellForRowAtIndexPath:</code>, we simply set our cell&#39;s provided <code>textLabel</code> to use the corresponding string in <code>@data</code>:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">cellForRowAtIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">cellForRowAtIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="n">cell</span><span class="o">.</span><span class="n">textLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="vi">@data</span><span class="o">[</span><span class="n">indexPath</span><span class="o">.</span><span class="n">row</span><span class="o">]</span>
 
@@ -263,8 +263,8 @@
 </div>
 
 <p>There aren&#39;t any required methods of a table&#39;s <code>delegate</code>; you&#39;re free to implement any (or none) for your needs. We&#39;re going to use the <code>delegate</code> method <code>tableView:didSelectRowAtIndexPath:</code> to figure out when a row was tapped by the user, like so:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="n">didSelectRowAtIndexPath</span><span class="ss">:indexPath</span><span class="p">)</span>
-  <span class="n">tableView</span><span class="o">.</span><span class="n">deselectRowAtIndexPath</span><span class="p">(</span><span class="n">indexPath</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">,</span> <span class="ss">didSelectRowAtIndexPath</span><span class="p">:</span><span class="n">indexPath</span><span class="p">)</span>
+  <span class="n">tableView</span><span class="o">.</span><span class="n">deselectRowAtIndexPath</span><span class="p">(</span><span class="n">indexPath</span><span class="p">,</span> <span class="ss">animated</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
 
   <span class="n">alert</span> <span class="o">=</span> <span class="no">UIAlertView</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">init</span>
   <span class="n">alert</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="vi">@data</span><span class="o">[</span><span class="n">indexPath</span><span class="o">.</span><span class="n">row</span><span class="o">]</span><span class="si">}</span><span class="s2"> tapped!&quot;</span>

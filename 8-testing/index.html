@@ -163,7 +163,7 @@
 
 <p>Woops, looks like our application doesn&#39;t actually have a window. Let&#39;s fix that in our <code>AppDelegate</code>:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">class</span> <span class="nc">AppDelegate</span>
-  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
     <span class="vi">@window</span> <span class="o">=</span> <span class="no">UIWindow</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithFrame</span><span class="p">(</span><span class="no">UIScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">applicationFrame</span><span class="p">)</span>
     <span class="vi">@window</span><span class="o">.</span><span class="n">makeKeyAndVisible</span>
   <span class="kp">true</span>
@@ -192,12 +192,12 @@
     <span class="k">super</span>
 
     <span class="vi">@button</span> <span class="o">=</span> <span class="no">UIButton</span><span class="o">.</span><span class="n">buttonWithType</span><span class="p">(</span><span class="no">UIButtonTypeRoundedRect</span><span class="p">)</span>
-    <span class="vi">@button</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Test me title!&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="ss">:UIControlStateNormal</span><span class="p">)</span>
+    <span class="vi">@button</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s2">&quot;Test me title!&quot;</span><span class="p">,</span> <span class="ss">forState</span><span class="p">:</span><span class="no">UIControlStateNormal</span><span class="p">)</span>
     <span class="vi">@button</span><span class="o">.</span><span class="n">accessibilityLabel</span> <span class="o">=</span> <span class="s2">&quot;Test me!&quot;</span>
     <span class="vi">@button</span><span class="o">.</span><span class="n">sizeToFit</span>
     <span class="nb">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">addSubview</span><span class="p">(</span><span class="vi">@button</span><span class="p">)</span>
 
-    <span class="vi">@button</span><span class="o">.</span><span class="n">addTarget</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">action</span><span class="ss">:&#39;tapped&#39;</span><span class="p">,</span> <span class="n">forControlEvents</span><span class="ss">:UIControlEventTouchUpInside</span><span class="p">)</span>
+    <span class="vi">@button</span><span class="o">.</span><span class="n">addTarget</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span><span class="s1">&#39;tapped&#39;</span><span class="p">,</span> <span class="ss">forControlEvents</span><span class="p">:</span><span class="no">UIControlEventTouchUpInside</span><span class="p">)</span>
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">tapped</span>
@@ -213,11 +213,11 @@
 <p><code>accessibilityLabel</code> is a string property available for every <code>UIView</code>. It&#39;s used by the operating system as the audible text to read aloud when someone uses the device&#39;s VoiceOver functionality (so don&#39;t fill it with garbage). Why are we introducing this now? Because RubyMotion&#39;s functional tests look up views by their <code>accessibilityLabel</code>, which ensures that views you&#39;re testing have been added to the hierarchy and don&#39;t just exist somewhere in memory.</p>
 
 <p>Finally we need to actually hook this controller up to our window in <code>AppDelegate</code>:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
   <span class="vi">@window</span> <span class="o">=</span> <span class="no">UIWindow</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithFrame</span><span class="p">(</span><span class="no">UIScreen</span><span class="o">.</span><span class="n">mainScreen</span><span class="o">.</span><span class="n">applicationFrame</span><span class="p">)</span>
   <span class="vi">@window</span><span class="o">.</span><span class="n">makeKeyAndVisible</span>
 
-  <span class="vi">@view_controller</span> <span class="o">=</span> <span class="no">ButtonController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="n">bundle</span><span class="ss">:nil</span><span class="p">)</span>
+  <span class="vi">@view_controller</span> <span class="o">=</span> <span class="no">ButtonController</span><span class="o">.</span><span class="n">alloc</span><span class="o">.</span><span class="n">initWithNibName</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">bundle</span><span class="p">:</span><span class="kp">nil</span><span class="p">)</span>
   <span class="vi">@window</span><span class="o">.</span><span class="n">rootViewController</span> <span class="o">=</span> <span class="vi">@view_controller</span>
 
   <span class="kp">true</span>

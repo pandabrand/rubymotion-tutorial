@@ -136,7 +136,7 @@
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="vg">$:</span><span class="o">.</span><span class="n">unshift</span><span class="p">(</span><span class="s2">&quot;/Library/RubyMotion/lib&quot;</span><span class="p">)</span>
 <span class="nb">require</span> <span class="s1">&#39;motion/project&#39;</span>
 
-<span class="no">Motion</span><span class="o">::</span><span class="no">Project</span><span class="o">::</span><span class="no">App</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+<span class="ss">Motion</span><span class="p">:</span><span class="ss">:Project</span><span class="o">::</span><span class="no">App</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
   <span class="c1"># Use `rake config&#39; to see complete project settings.</span>
   <span class="n">app</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;HelloMotion&#39;</span>
 <span class="k">end</span>
@@ -157,7 +157,7 @@
 
 <p>Turns out RubyMotion&#39;s <code>App</code> object has some sensible defaults, such as (most importantly) recursively including all Ruby files in <code>./app</code>. Remember that <code>app_delegate.rb</code> I mentioned earlier? Turns out that guy got included when we compiled our app! Let&#39;s take a look:</p>
 <div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">class</span> <span class="nc">AppDelegate</span>
-  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
     <span class="kp">true</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -174,7 +174,7 @@
 </div>
 
 <p>Whoa buddy, there&#39;s our &quot;unimportant&quot; AppDelegate! RubyMotion actually looks for a class with the name we assign as <code>delegate_class</code> and uses that in launching our app. We could&#39;ve called our class <code>SuperAppDelegate</code> and changed our <code>Rakefile</code> as such:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="no">Motion</span><span class="o">::</span><span class="no">Project</span><span class="o">::</span><span class="no">App</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="ss">Motion</span><span class="p">:</span><span class="ss">:Project</span><span class="o">::</span><span class="no">App</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
   <span class="n">app</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;HelloMotion&#39;</span>
   <span class="n">app</span><span class="o">.</span><span class="n">delegate_class</span> <span class="o">=</span> <span class="s2">&quot;SuperAppDelegate&quot;</span>
 <span class="k">end</span>
@@ -190,7 +190,7 @@
 <p>In Ruby, named arguments don&#39;t exist; it has traditional methods like <code>obj.make_box(origin, size)</code>. RubyMotion decided to add named arguments to its implementation of Ruby so the original Apple APIs were compatible, like so: <code>obj.makeBox(origin, andSize: size)</code>. That <code>andSize</code> isn&#39;t just sugar; it&#39;s a real part of the method name. <code>obj.call_method(var1, withParam: var2)</code> is totally different than <code>obj.call_method(var1, withMagic: var2)</code>, despite their normal Ruby forms looking like <code>obj.call_method</code>. [Named arguments <em>do</em> exist in Ruby 2.0, but RubyMotion is currently compatible with Ruby 1.9.3]</p>
 
 <p>Anyway, back to the main plot. <code>application:didFinishLaunchingWithOptions:</code> is called when the system finishes setting up the app and becomes ready for us to do our own setup:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
   <span class="kp">true</span>
 <span class="k">end</span>
 </code></pre>
@@ -199,7 +199,7 @@
 <p>For now, just assume it will always return <code>true</code>. Some apps may want to use <code>launchOptions</code> to determine if the app should be started or not, but most of the time you won&#39;t do that.</p>
 
 <p>Now we understand how our app boots up and have our entry point. Let&#39;s...do something? Change your <code>application:didFinishLaunchingWithOptions:</code> to look like:</p>
-<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+<div class="highlight"><pre class='codehilite'><code class="ruby syntax"><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="ss">didFinishLaunchingWithOptions</span><span class="p">:</span><span class="n">launchOptions</span><span class="p">)</span>
   <span class="n">alert</span> <span class="o">=</span> <span class="no">UIAlertView</span><span class="o">.</span><span class="n">new</span>
   <span class="n">alert</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Hello Motion!&quot;</span>
   <span class="n">alert</span><span class="o">.</span><span class="n">show</span>
